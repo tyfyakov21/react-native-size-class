@@ -1,6 +1,6 @@
 {
   "name": "react-native-size-class",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A convenient library to get updates on SizeClass changes on iOS and iPadOS. Temporarily doesn't support Android.",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
