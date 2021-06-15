@@ -1,26 +1,65 @@
-# react-native-size-class
+# `react-native-size-classes`
 
-A convenient library to get updates on SizeClass changes on iOS and iPadOS. Temporarily doesn't support Android.
+React Native library that allows you to get an information about size class changes on device.
 
-## Installation
+## Getting started
 
+Install the library using npm:
 ```sh
-npm install react-native-size-class
+npm install --save react-native-size-classes
 ```
 
+#### Using React Native >= 0.60
+Linking the package manually is not required anymore with [Autolinking](https://github.com/react-native-community/cli/blob/master/docs/autolinking.md).
+
+- **iOS Platform:**
+
+  `$ npx pod-install` # CocoaPods on iOS needs this extra step
+
+  #### Using React Native < 0.60
+
+You then need to link the native parts of the library for the platforms you are using. The easiest way to link the library is using the CLI tool by running this command from the root of your project:
+
+```
+react-native link react-native-size-classes
+```
+
+If you can't or don't want to use the CLI tool, you can also manually link the library using the instructions below (click on the arrow to show them):
+
+<details>
+<summary>Manually link the library on iOS</summary>
+
+Either follow the [instructions in the React Native documentation](https://facebook.github.io/react-native/docs/linking-libraries-ios#manual-linking) to manually link the framework or link using [Cocoapods](https://cocoapods.org) by adding this to your `Podfile`:
+
+```ruby
+pod 'react-native-size-classes', :path => '../node_modules/react-native-size-classes'
+```
+
+</details>
+
 ## Usage
+Import the library:
 
 ```js
-import SizeClass from "react-native-size-class";
+import { useSizeClass } from 'react-native-size-classes';
+```
 
-// ...
+Receive updates on size class changes
+```js
+ const sizeClass = useSizeClass();
 
-const result = await SizeClass.multiply(3, 7);
+React.useEffect(() => {
+    // Handle changes of size class here
+}, [sizeClass]);
 ```
 
 ## Contributing
 
 See the [contributing guide](CONTRIBUTING.md) to learn how to contribute to the repository and the development workflow.
+
+## Maintainers
+
+* [Nikita Tiufiakov](https://github.com/tyfyakov21) - [React Native/iOS Developer at Pipedrive](https://www.pipedrive.com/)
 
 ## License
 
