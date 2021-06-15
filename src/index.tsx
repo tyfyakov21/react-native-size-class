@@ -1,12 +1,6 @@
-import { requireNativeComponent, ViewStyle } from 'react-native';
+import { SizeClassContext } from './SizeClassContext';
+import { SizeClassProvider } from './SizeClassProvider';
+import { SizeClassView } from './SizeClassView.native';
+import { useSizeClass } from './useSizeClass';
 
-type SizeClassProps = {
-  color: string;
-  style: ViewStyle;
-};
-
-export const SizeClassViewManager = requireNativeComponent<SizeClassProps>(
-'SizeClassView'
-);
-
-export default SizeClassViewManager;
+export { useSizeClass, SizeClassProvider, SizeClassContext, SizeClassView };
