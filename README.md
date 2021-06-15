@@ -38,7 +38,20 @@ pod 'react-native-size-class', :path => '../node_modules/react-native-size-class
 </details>
 
 ## Usage
-Import the library:
+First, wrap your app in 'SizeClassProvider' component:
+
+```js
+import { SizeClassProvider } from 'react-native-size-class';
+const App = () => {
+  return (
+    <SizeClassProvider>
+      <YourApp>
+    </SizeClassProvider>
+  );
+}
+```
+
+Then, inside YourApp component call 'useSizeClass' hook:
 
 ```js
 import { useSizeClass } from 'react-native-size-class';
@@ -46,11 +59,7 @@ import { useSizeClass } from 'react-native-size-class';
 
 Receive updates on size class changes
 ```js
- const sizeClass = useSizeClass();
-
-React.useEffect(() => {
-    // Handle changes of size class here
-}, [sizeClass]);
+ const {horizontal, vertical} = useSizeClass();
 ```
 
 ## Contributing
