@@ -43,7 +43,7 @@ export const SizeClassProvider: React.FC<SizeClassProviderProps> = (
     <SizeClassContext.Provider
       value={{ horizontal: horizontalSizeClass, vertical: verticalSizeClass }}
     >
-      <SizeClassView>{props.children}</SizeClassView>
+      <SizeClassView style={{ height: '100%' }}>{props.children}</SizeClassView>
     </SizeClassContext.Provider>
   );
 };
