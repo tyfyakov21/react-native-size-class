@@ -1,6 +1,6 @@
 # `react-native-size-class`
 
-React Native library that allows you to get an information about size class changes on device.
+React Native library that allows you to get an information about [size class changes on device](https://bignerdranch.com/blog/designing-for-size-classes-in-ios/#:~:text=In%20iOS%2C%20Size%20Classes%20are,and%20hC%20(Compact%20height).).
 
 ## Getting started
 
