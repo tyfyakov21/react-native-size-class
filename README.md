@@ -4,6 +4,9 @@ React Native library that allows you to get an information about [size class cha
 
 ## Getting started
 
+This version requires React Native 0.82 or newer, which runs on the New
+Architecture.
+
 Install the library using npm:
 ```sh
 npm install --save react-native-size-class

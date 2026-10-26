@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import { Platform } from 'react-native';
+import React, { useState } from 'react';
+import { Platform, type NativeSyntheticEvent } from 'react-native';
 import { SizeClassContext } from './SizeClassContext';
-import { SizeClassValue } from './internal/types';
 import { SizeClassView } from './SizeClassView.native';
-import { nativeEventsEmitter } from './internal';
+import { SizeClassValue } from './internal/types';
+import type { SizeClassChangeEvent } from './RNSizeClassViewNativeComponent';
 
 interface SizeClassProviderProps {
   children: React.ReactElement | React.ReactElement[];
@@ -18,32 +18,25 @@ export const SizeClassProvider: React.FC<SizeClassProviderProps> = (
     SizeClassValue.unknown
   );
 
-  const sizeClassChangeEventName = 'SizeClassChangeEvent';
-
-  useEffect(() => {
-    if (Platform.OS === 'ios') {
-      const listener = nativeEventsEmitter().addListener(
-        sizeClassChangeEventName,
-        (notification) => {
-          console.log(notification);
-          setHorizontalSizeClass(notification.horizontalSizeClass);
-          setVerticalSizeClass(notification.verticalSizeClass);
-        }
-      );
-
-      return () => {
-        listener.remove();
-      };
-    } else {
-      return () => {};
-    }
-  }, []);
+  const handleSizeClassChange = (
+    event: NativeSyntheticEvent<SizeClassChangeEvent>
+  ) => {
+    setHorizontalSizeClass(
+      event.nativeEvent.horizontalSizeClass as SizeClassValue
+    );
+    setVerticalSizeClass(event.nativeEvent.verticalSizeClass as SizeClassValue);
+  };
 
   return (
     <SizeClassContext.Provider
       value={{ horizontal: horizontalSizeClass, vertical: verticalSizeClass }}
     >
-      <SizeClassView style={{ height: '100%' }}>{props.children}</SizeClassView>
+      <SizeClassView
+        style={{ height: '100%' }}
+        onSizeClassChange={Platform.OS === 'ios' ? handleSizeClassChange : null}
+      >
+        {props.children}
+      </SizeClassView>
     </SizeClassContext.Provider>
   );
 };

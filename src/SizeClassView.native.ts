@@ -1,5 +1,3 @@
-import { requireNativeComponent } from 'react-native';
-import type { NativeSizeClassViewProps } from './internal/types';
+import RNSizeClassView from './RNSizeClassViewNativeComponent';
 
-export const SizeClassView =
-  requireNativeComponent<NativeSizeClassViewProps>('RNSizeClassView');
+export const SizeClassView = RNSizeClassView;
