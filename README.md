@@ -1,77 +1,74 @@
 # `react-native-size-class`
 
-React Native library that allows you to get an information about [size class changes on device](https://bignerdranch.com/blog/designing-for-size-classes-in-ios/#:~:text=In%20iOS%2C%20Size%20Classes%20are,and%20hC%20(Compact%20height).).
+Get updates when the iOS or iPadOS horizontal or vertical size class changes. This is useful when adapting an interface to different device sizes and window configurations.
 
-## Getting started
+## Compatibility
 
-This version requires React Native 0.82 or newer, which runs on the New
-Architecture.
+- React Native 0.82 or newer, using the New Architecture (Fabric).
+- iOS and iPadOS size class reporting.
+- Android is not currently supported for size class reporting; values remain `unknown`.
 
-Install the library using npm:
+This library uses a Fabric native component and does not support the legacy React Native architecture.
+
+## Installation
+
+Install the package:
+
 ```sh
-npm install --save react-native-size-class
+npm install react-native-size-class
 ```
 
-#### Using React Native >= 0.60
-Linking the package manually is not required anymore with [Autolinking](https://github.com/react-native-community/cli/blob/master/docs/autolinking.md).
+For iOS and iPadOS, install the CocoaPods dependencies:
 
-- **iOS Platform:**
-
-  `$ npx pod-install` # CocoaPods on iOS needs this extra step
-
-  #### Using React Native < 0.60
-
-You then need to link the native parts of the library for the platforms you are using. The easiest way to link the library is using the CLI tool by running this command from the root of your project:
-
-```
-react-native link react-native-size-class
+```sh
+npx pod-install
 ```
 
-If you can't or don't want to use the CLI tool, you can also manually link the library using the instructions below (click on the arrow to show them):
-
-<details>
-<summary>Manually link the library on iOS</summary>
-
-Either follow the [instructions in the React Native documentation](https://facebook.github.io/react-native/docs/linking-libraries-ios#manual-linking) to manually link the framework or link using [Cocoapods](https://cocoapods.org) by adding this to your `Podfile`:
-
-```ruby
-pod 'react-native-size-class', :path => '../node_modules/react-native-size-class'
-```
-
-</details>
+React Native autolinking handles native package linking.
 
 ## Usage
-First, wrap your app in 'SizeClassProvider' component:
 
-```js
+Wrap the part of your app that needs size class updates in `SizeClassProvider`:
+
+```tsx
 import { SizeClassProvider } from 'react-native-size-class';
-const App = () => {
+import { AppContent } from './AppContent';
+
+export default function App() {
   return (
     <SizeClassProvider>
-      <YourApp>
+      <AppContent />
     </SizeClassProvider>
   );
 }
 ```
 
-Then, inside YourApp component call 'useSizeClass' hook:
+Read the current values with `useSizeClass` in a descendant of the provider:
 
-```js
+```tsx
+import { Text } from 'react-native';
 import { useSizeClass } from 'react-native-size-class';
+
+export function AppContent() {
+  const { horizontal, vertical } = useSizeClass();
+
+  return (
+    <Text>
+      Horizontal: {horizontal}; vertical: {vertical}
+    </Text>
+  );
+}
 ```
 
-Receive updates on size class changes
-```js
- const {horizontal, vertical} = useSizeClass();
-```
+Each value is `compact`, `regular`, or `unknown`. On iOS and iPadOS, the hook updates when the native size class changes.
 
 ## Contributing
 
-See the [contributing guide](CONTRIBUTING.md) to learn how to contribute to the repository and the development workflow.
+See the [contributing guide](CONTRIBUTING.md) for the development workflow.
 
-## Maintainers
+## Maintainer
 
-* [Nikita Tiufiakov](https://github.com/tyfyakov21) - [React Native/iOS Developer at Pipedrive](https://www.pipedrive.com/)
+[Nikita Tiufiakov](https://github.com/tyfyakov21)
 
 ## License
 
