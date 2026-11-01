@@ -17,11 +17,16 @@
     "react-native-size-class": "file:.."
   },
   "devDependencies": {
+    "@babel/core": "^7.12.10",
+    "@babel/runtime": "^7.12.5",
     "@react-native-community/cli": "^20.2.0",
     "@react-native/babel-preset": "0.88.0",
     "@react-native/metro-config": "0.88.0",
-    "@babel/core": "^7.12.10",
-    "@babel/runtime": "^7.12.5",
-    "babel-plugin-module-resolver": "^4.1.0"
+    "babel-plugin-module-resolver": "^5.0.3"
+  },
+  "overrides": {
+    "babel-plugin-module-resolver": {
+      "glob": "^14.0.2"
+    }
   }
 }
